@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/oklog/run"
+	"github.com/tsingson/run"
 )
 
 func TestZero(t *testing.T) {

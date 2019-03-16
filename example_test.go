@@ -2,13 +2,14 @@ package run_test
 
 import (
 	"context"
-	"errors"
 	"fmt"
 	"net"
 	"net/http"
 	"time"
 
-	"github.com/oklog/run"
+	"golang.org/x/xerrors"
+
+	"github.com/tsingson/run"
 )
 
 func ExampleGroup_Add_basic() {
@@ -32,7 +33,7 @@ func ExampleGroup_Add_basic() {
 	{
 		g.Add(func() error {
 			fmt.Printf("The second actor is returning immediately\n")
-			return errors.New("immediate teardown")
+			return xerrors.New("immediate teardown")
 		}, func(err error) {
 			// Note that this interrupt function is called, even though the
 			// corresponding execute function has already returned.
@@ -78,7 +79,7 @@ func ExampleGroup_Add_listener() {
 	}
 	{
 		g.Add(func() error {
-			return errors.New("immediate teardown")
+			return xerrors.New("immediate teardown")
 		}, func(error) {
 			//
 		})
