@@ -16,6 +16,7 @@ func main() {
 		g.Add(func() error {
 			return runUntilCanceled(ctx)
 		}, func(error) {
+			fmt.Println(" context cancel func be called. ")
 			cancel()
 		})
 	}
@@ -36,7 +37,7 @@ func runUntilCanceled(ctx context.Context) error {
 		case <-ctx.Done():
 			return ctx.Err()
 		default:
-			fmt.Println("cron job goroutine in running *****************************", time.Now())
+			fmt.Println("cron job goroutine in running ---------------> loop: ", time.Now())
 			time.Sleep(1 * time.Second)
 		}
 
